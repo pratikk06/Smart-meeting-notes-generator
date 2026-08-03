@@ -165,9 +165,12 @@ if st.session_state.uploaded_meta:
     model_size = st.selectbox(
         "Model size (bigger = more accurate, slower)",
         options=["tiny", "base", "small", "medium"],
-        index=1,  # default: base
+        index=0,  # default: tiny — lowest memory footprint, safest on limited-RAM
+                  # environments like Streamlit Cloud's free tier. Bump this to 1
+                  # (base) if running locally with plenty of RAM.
         help="'tiny'/'base' are fast and good for testing. Use 'small' or "
-             "'medium' for better accuracy once you're ready to rely on it.",
+             "'medium' for better accuracy once you're ready to rely on it. "
+             "'tiny' is recommended if running on a low-memory server.",
     )
 
     if st.button("Generate Transcript", type="primary"):
